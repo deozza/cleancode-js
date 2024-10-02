@@ -1,10 +1,10 @@
-const cardRanks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
-const cardSuits = ['♠', '♣', '♥', '♦'];
-let deck: any[] = [];
-let hand: any[] = [];
-let discard: any[] = [];
+export const cardRanks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+export const cardSuits = ['♠', '♣', '♥', '♦'];
+export let deck: any[] = [];
+export let hand: any[] = [];
+export let discard: any[] = [];
 
-function generateDeck(cardRanks: Array<string>, cardSuits: Array<string>) {
+export function generateDeck(cardRanks: Array<string>, cardSuits: Array<string>) {
     cardRanks.forEach(rank => {
         cardSuits.forEach(suit => {
             addCardToDeck({ rank, suit });
@@ -12,26 +12,43 @@ function generateDeck(cardRanks: Array<string>, cardSuits: Array<string>) {
     });
 }
 
-function addCardToDeck(card: any) {
+export function addCardToDeck(card: any) {
+    if(checkCardIsValid(card) === false) {
+        return;
+    }
+    
     deck.push(card);
 }
 
-function shuffleDeck() {
+export function checkCardIsValid(card: any): boolean {
+    if(Array.isArray(card)) {
+        return false;
+    }
+
+    const notAllowedTypes = ['number', 'string', 'boolean'];
+    if(notAllowedTypes.includes(typeof card)) {
+        return false;
+    }
+
+    return true;
+}
+
+export function shuffleDeck() {
     return deck.sort(() => Math.random() - 0.5);
 }
 
-function getTopCardFromDeck() {
+export function getTopCardFromDeck() {
     if(isDeckEmpty()) {
         throw new Error('Deck is empty');
     }
     return deck.shift();
 }
 
-function isDeckEmpty(): boolean {
+export function isDeckEmpty(): boolean {
     return deck.length === 0;
 }
 
-function drawCard() {
+export function drawCard() {
     try {
         const card = getTopCardFromDeck();
         hand.push(card);
@@ -41,7 +58,7 @@ function drawCard() {
     }
 }
 
-function discardCard() {
+export function discardCard() {
     try {
         const card = getTopCardFromDeck();
         discard.push(card);

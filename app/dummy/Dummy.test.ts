@@ -1,6 +1,10 @@
-import { expect, test } from 'vitest'
+import { expect, test, describe } from 'vitest'
 import { sum } from './Dummy'
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(sum(1, 2)).toBe(3)
-})
+describe('Dummy class is working', () => {
+  test('adds 1 + 2 to equal 3', () => {
+    const result = sum(1, 2);
+    const expectedResult = 3;
+    expect(result).toBe(expectedResult)
+  })
+});
