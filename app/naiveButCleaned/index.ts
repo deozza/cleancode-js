@@ -12,6 +12,10 @@ export function generateDeck(cardRanks: Array<string>, cardSuits: Array<string>)
     });
 }
 
+export function resetDeck() {
+    deck = [];
+}
+
 export function addCardToDeck(card: any) {
     if(checkCardIsValid(card) === false) {
         return;
